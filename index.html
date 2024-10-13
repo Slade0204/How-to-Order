@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; /* Light background for contrast */
+            margin: 0;
+            padding: 20px;
+        }
+        .order-form {
+            max-width: 600px;
+            margin: auto;
+            background: #FFB6C1; /* Light pink color for the form */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #333; /* Darker text for better readability */
+        }
+        .order-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #FF1493; /* Deep pink color for button */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #D81B60; /* Pink for labels */
+        }
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensure padding is included in width */
+        }
+        .form-group input[type="tel"] {
+            width: calc(100% - 120px); /* Adjust width for input to allow for select */
+        }
+        .form-group select {
+            width: auto; /* Set select width to auto */
+        }
+        .form-group .country-code-container {
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+        }
+        .order-btn {
+            display: block;
+            width: 100%;
+            background-color: #FF1493; /* Deep pink color for button */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px; /* Add margin to separate from form groups */
+        }
+        .order-btn:hover {
+            background-color: #C71585; /* Medium violet red for hover effect */
+        }
+        .form-note {
+            font-size: 12px;
+            color: #333; /* Dark text for notes */
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+    </style>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent form submission for the demo
+
+            // Display completion message
+            alert("Your order is complete!");
+
+            // Ask if the user wants to order again
+            if (confirm("Would you like to place another order?")) {
+                // Reset the form for a new order
+                document.getElementById("orderForm").reset();
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="order-form">
+        <h2>Place Your Order</h2>
+        <form id="orderForm" action="submit-order.php" method="POST" onsubmit="handleSubmit(event)">
+            <!-- Customer Information -->
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="customer_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="customer_address" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="country-code">Contact Number:</label>
+                <div class="country-code-container">
+                    <select id="country-code" name="country_code" required>
+                        <option value="+1">🇺🇸 +1 (United States)</option>
+                        <option value="+44">🇬🇧 +44 (United Kingdom)</option>
+                        <option value="+91">🇮🇳 +91 (India)</option>
+                        <option value="+61">🇦🇺 +61 (Australia)</option>
+                        <option value="+81">🇯🇵 +81 (Japan)</option>
+                        <option value="+49">🇩🇪 +49 (Germany)</option>
+                        <option value="+33">🇫🇷 +33 (France)</option>
+                        <option value="+34">🇪🇸 +34 (Spain)</option>
+                        <option value="+55">🇧🇷 +55 (Brazil)</option>
+                        <option value="+86">🇨🇳 +86 (China)</option>
+                        <option value="+7">🇷🇺 +7 (Russia)</option>
+                        <option value="+351">🇵🇹 +351 (Portugal)</option>
+                        <option value="+52">🇲🇽 +52 (Mexico)</option>
+                        <option value="+62">🇮🇩 +62 (Indonesia)</option>
+                        <option value="+234">🇳🇬 +234 (Nigeria)</option>
+                        <option value="+82">🇰🇷 +82 (South Korea)</option>
+                        <option value="+39">🇮🇹 +39 (Italy)</option>
+                        <option value="+63">🇵🇭 +63 (Philippines)</option>
+                        <option value="+31">🇳🇱 +31 (Netherlands)</option>
+                        <option value="+27">🇿🇦 +27 (South Africa)</option>
+                    </select>
+                    <input type="tel" id="contact" name="customer_contact" 
+                           pattern="^\+?[0-9\s\-()]{7,15}$" 
+                           placeholder="123-456-7890" required>
+                </div>
+                <div> "" </div>
+                <div class="form-note">Enter your phone number after selecting the country code</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="customer_email" placeholder="example@domain.com" required>
+            </div>
+
+            <!-- Product Details -->
+            <div class="form-group">
+                <label for="product">Product:</label>
+                <select id="product" name="product" required>
+                    <option value="">Select a Product</option>
+                    <option value="Dream Glow Sunscreen SPF50">Dream Glow Sunscreen SPF50</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Order Notes:</label>
+                <textarea id="notes" name="order_notes" rows="3" placeholder="Any additional instructions..."></textarea>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="form-group">
+                <label for="payment">Payment Method:</label>
+                <select id="payment" name="payment_method" required>
+                    <option value="">Select a Payment Method</option>
+                    <option value="Cash on Delivery">Cash on Delivery</option>
+                    <option value="GCash">GCash</option>
+                    <option value="Maya">Maya</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="PayPal">PayPal</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="order-btn">Submit Order</button>
+        </form>
+    </div>
+
+</body>
+</html>
